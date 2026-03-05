@@ -54,8 +54,11 @@ if ($user) {
             // relative path from login_app/verifikasi to /guru/dashboard.php
             header("Location: ../../guru/dashboard.php");
             exit;
+        } elseif (isset($user['role']) && $user['role'] === 'guru_bk') {
+            header("Location: ../../guru_bk/dashboard.php");
+            exit;
         } elseif (isset($user['role']) && $user['role'] === 'siswa') {
-            header("Location: ../siswa.php");
+            header("Location: ../../siswa/dashboard.php");
             exit;
         } else {
             header("Location: ../../admin/dashboard.php");

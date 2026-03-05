@@ -283,7 +283,11 @@ if ($siswa_id) {
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h2>Menu</h2>
+            <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
+                <img src="asset/gambar/images.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Kepsek Panel</h2>
+                <div style="color: #a0aec0; font-size: 14px; margin-top: 5px; font-weight: 500;">Sistem Poin Pelanggaran</div>
+            </div>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="siswa.php">Data Siswa</a></li>

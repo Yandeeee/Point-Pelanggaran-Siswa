@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'guru_bk') {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -131,17 +131,15 @@ if ($action == 'delete' && isset($_GET['id'])) {
         <div class="sidebar">
             <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
                 <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Admin Panel</h2>
+                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Guru BK Panel</h2>
                 <div style="color: #a0aec0; font-size: 14px; margin-top: 5px; font-weight: 500;">Sistem Poin Pelanggaran</div>
             </div>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
                 <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
-                <li><a href="guru.php">Guru</a></li>
                 <li><a href="siswa.php" class="active">Siswa</a></li>
                 <li><a href="surat.php">Cetak Laporan</a></li>
-                <li><a href="users.php">Manajemen User</a></li>
                 <li style="margin-top: auto;"><a href="../login_app/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
@@ -151,7 +149,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <div class="header">
                 <h1>Data Siswa</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru1' ? 'Drs. I Gusti Made Murjana,M.Pd' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru5' ? 'Dedi Pratama' : $_SESSION['username']); ?></span>
                 </div>
             </div>
 
