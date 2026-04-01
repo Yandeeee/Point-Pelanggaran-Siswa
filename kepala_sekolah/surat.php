@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'kepala_sekolah'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -206,7 +206,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <h2>Cetak Surat</h2>
             </div>
             <div class="user-info">
-                <span>Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru1' ? 'Drs. I Gusti Made Murjana,M.Pd' : $_SESSION['username']); ?></span>
+                <span style="color: #666; font-size: 14px;">Selamat datang, Drs. I Gusti Made Murjana,M.Pd</span>
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'kepala_sekolah'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -12,7 +12,7 @@ $error = '';
 $success = '';
 
 // Handle Delete
-if (isset($_GET['delete'])) {
+if (isset($_GET['delete']) && $_SESSION['role'] === 'admin') {
     $id = (int)$_GET['delete'];
     $delete_query = mysqli_query($conn, "DELETE FROM guru WHERE id = $id");
     if ($delete_query) {
@@ -23,7 +23,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Handle Add/Edit Form Submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['role'] === 'admin') {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $kode_guru = mysqli_real_escape_string($conn, $_POST['kode_guru']);
     $jenis_kelamin = mysqli_real_escape_string($conn, $_POST['jenis_kelamin']);
@@ -140,7 +140,7 @@ if ($action === 'edit' && isset($_GET['id'])) {
             <div class="header">
                 <h1>Data Guru</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru1' ? 'Drs. I Gusti Made Murjana,M.Pd' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, Drs. I Gusti Made Murjana,M.Pd</span>
                 </div>
             </div>
 
@@ -154,9 +154,11 @@ if ($action === 'edit' && isset($_GET['id'])) {
                 <?php endif; ?>
 
                 <?php if ($action === 'list'): ?>
+                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Guru</a>
                     </div>
+                    <?php endif; ?>
                     
                     <div style="overflow-x: auto;">
                         <table>
@@ -168,7 +170,9 @@ if ($action === 'edit' && isset($_GET['id'])) {
                                     <th>L/P</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                                     <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,10 +185,12 @@ if ($action === 'edit' && isset($_GET['id'])) {
                                             <td><?php echo htmlspecialchars($guru['jenis_kelamin'] == 'Laki-laki' ? 'L' : 'P'); ?></td>
                                             <td><?php echo htmlspecialchars($guru['email']); ?></td>
                                             <td><span class="badge badge-info"><?php echo htmlspecialchars(ucfirst($guru['role'])); ?></span></td>
+                                            <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                                             <td>
                                                 <a href="?action=edit&id=<?php echo $guru['id']; ?>" class="btn btn-warning btn-small"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="?delete=<?php echo $guru['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus guru ini?');"><i class="fas fa-trash"></i> Hapus</a>
                                             </td>
+                                            <?php endif; ?>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
@@ -196,7 +202,7 @@ if ($action === 'edit' && isset($_GET['id'])) {
                         </table>
                     </div>
 
-                <?php elseif ($action === 'add' || $action === 'edit'): ?>
+                <?php elseif (($action === 'add' || $action === 'edit') && $_SESSION['role'] === 'admin'): ?>
                     <div class="form-container">
                         <h3><?php echo $action === 'add' ? 'Tambah Guru Baru' : 'Edit Data Guru'; ?></h3>
                         <br>

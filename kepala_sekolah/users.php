@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'kepala_sekolah'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -19,7 +19,7 @@ if ($query) {
 }
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['role'] === 'admin') {
     if ($action == 'add') {
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -81,7 +81,7 @@ if ($action == 'edit' && isset($_GET['id'])) {
 }
 
 // Handle delete
-if ($action == 'delete' && isset($_GET['id'])) {
+if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') {
     $id = intval($_GET['id']);
     // Prevent self-deletion
     if ($id == $_SESSION['user_id']) {
@@ -131,12 +131,12 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <div class="header">
                 <h1>Manajemen User</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru1' ? 'Drs. I Gusti Made Murjana,M.Pd' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, Drs. I Gusti Made Murjana,M.Pd</span>
                 </div>
             </div>
 
             <div class="content">
-                <?php if ($action == 'add' || $action == 'edit'): ?>
+                <?php if (($action == 'add' || $action == 'edit') && $_SESSION['role'] === 'admin'): ?>
                     <!-- Form Tambah/Edit -->
                     <h2><?php echo $action == 'add' ? 'Tambah User Baru' : 'Edit Data User'; ?></h2>
                     
@@ -210,9 +210,11 @@ if ($action == 'delete' && isset($_GET['id'])) {
                         <div class="alert alert-danger"><?php echo $error; ?></div>
                     <?php endif; ?>
 
+                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="users.php?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah User</a>
                     </div>
+                    <?php endif; ?>
 
                     <?php if (count($data) > 0): ?>
                         <table>
@@ -224,7 +226,9 @@ if ($action == 'delete' && isset($_GET['id'])) {
                                     <th>L/P</th>
                                     <th>Role</th>
                                     <th>Dibuat</th>
+                                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                                     <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -239,10 +243,12 @@ if ($action == 'delete' && isset($_GET['id'])) {
                                         <td><?php echo isset($row['jenis_kelamin']) && $row['jenis_kelamin'] == 'Laki-laki' ? 'L' : (isset($row['jenis_kelamin']) && $row['jenis_kelamin'] == 'Perempuan' ? 'P' : '-'); ?></td>
                                         <td><span class="badge badge-info"><?php echo ucfirst(str_replace('_', ' ', $row['role'])); ?></span></td>
                                         <td><?php echo date('d-m-Y H:i', strtotime($row['created_at'])); ?></td>
+                                        <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
                                         <td>
                                             <a href="users.php?action=edit&id=<?php echo $row['id']; ?>" class="btn btn-warning btn-small">Edit</a>
                                             <a href="users.php?action=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                                         </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

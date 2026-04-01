@@ -23,6 +23,7 @@
             <select name="role" required>
                 <option value="">Masuk Sebagai</option>
                 <option value="admin">Admin</option>
+                <option value="kepala_sekolah">Kepala Sekolah</option>
                 <optgroup label="Guru">
                     <option value="guru">Guru Mapel</option>
                     <option value="guru_bk">Guru BK</option>
