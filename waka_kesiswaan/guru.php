@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'kepala_sekolah'])) {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'waka_kesiswaan'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -154,7 +154,7 @@ if ($action === 'edit' && isset($_GET['id'])) {
                 <?php endif; ?>
 
                 <?php if ($action === 'list'): ?>
-                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Guru</a>
                     </div>
@@ -170,7 +170,7 @@ if ($action === 'edit' && isset($_GET['id'])) {
                                     <th>L/P</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                     <th>Aksi</th>
                                     <?php endif; ?>
                                 </tr>
@@ -185,7 +185,7 @@ if ($action === 'edit' && isset($_GET['id'])) {
                                             <td><?php echo htmlspecialchars($guru['jenis_kelamin'] == 'Laki-laki' ? 'L' : 'P'); ?></td>
                                             <td><?php echo htmlspecialchars($guru['email']); ?></td>
                                             <td><span class="badge badge-info"><?php echo htmlspecialchars(ucfirst($guru['role'])); ?></span></td>
-                                            <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                                            <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                             <td>
                                                 <a href="?action=edit&id=<?php echo $guru['id']; ?>" class="btn btn-warning btn-small"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="?delete=<?php echo $guru['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus guru ini?');"><i class="fas fa-trash"></i> Hapus</a>

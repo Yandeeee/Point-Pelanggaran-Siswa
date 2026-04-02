@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'guru') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'waka_kesiswaan'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -45,7 +45,7 @@ if ($query_pelanggaran) {
 }
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['role'] === 'admin') {
     if ($action == 'add') {
         $siswa_id = intval($_POST['siswa_id']);
         $pelanggaran_ids = isset($_POST['pelanggaran_id']) ? $_POST['pelanggaran_id'] : [];
@@ -134,7 +134,7 @@ if ($action == 'edit' && isset($_GET['id'])) {
 }
 
 // Handle delete
-if ($action == 'delete' && isset($_GET['id'])) {
+if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') {
     $id = intval($_GET['id']);
     $delete = mysqli_query($conn, "DELETE FROM riwayat_pelanggaran WHERE id=$id");
     if ($delete) {
@@ -158,14 +158,18 @@ if ($action == 'delete' && isset($_GET['id'])) {
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
-                <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Guru Panel</h2>
-                <div style="color: #a0aec0; font-size: 14px; margin-top: 5px; font-weight: 500;">Sistem Poin Pelanggaran</div>
+                <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 60px; height: 60px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Admin Panel</h2>
+                <div style="color: #c4c8ceff; font-size: 14px; margin-top: 10px; font-weight: 500;">Sistem Poin Pelanggaran</div>
             </div>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php" class="active">Riwayat Pelanggaran</a></li>
-
+                <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
+                <li><a href="guru.php">Data Guru</a></li>
+                <li><a href="siswa.php">Data Siswa</a></li>
+                <li><a href="surat.php">Cetak Laporan</a></li>
+                <li><a href="users.php">Manajemen User</a></li>
                 <li style="margin-top: auto;"><a href="../login_app/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
@@ -180,7 +184,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             </div>
 
             <div class="content">
-                <?php if ($action == 'add' || $action == 'edit'): ?>
+                <?php if (($action == 'add' || $action == 'edit') && $_SESSION['role'] === 'admin'): ?>
                     <!-- Form Tambah/Edit -->
                     <h2><?php echo $action == 'add' ? 'Catat Pelanggaran Siswa' : 'Edit Pelanggaran Siswa'; ?></h2>
                     
@@ -253,9 +257,11 @@ if ($action == 'delete' && isset($_GET['id'])) {
                         <div class="alert alert-success"><?php echo $message; ?></div>
                     <?php endif; ?>
 
+                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="riwayat_pelanggaran.php?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Catat Pelanggaran</a>
                     </div>
+                    <?php endif; ?>
 
                     <?php if (count($data) > 0): ?>
                         <table>
@@ -266,7 +272,9 @@ if ($action == 'delete' && isset($_GET['id'])) {
                                     <th>Pelanggaran</th>
                                     <th>Poin</th>
                                     <th>Tanggal Catat</th>
+                                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                     <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -280,10 +288,12 @@ if ($action == 'delete' && isset($_GET['id'])) {
                                         <td><?php echo htmlspecialchars($row['nama_pelanggaran']); ?></td>
                                         <td><span class="badge badge-warning"><?php echo $row['sanksi_poin']; ?> Poin</span></td>
                                         <td><?php echo date('d-m-Y H:i', strtotime($row['created_at'])); ?></td>
+                                        <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                         <td>
                                             <a href="riwayat_pelanggaran.php?action=edit&id=<?php echo $row['id']; ?>" class="btn btn-warning btn-small">Edit</a>
                                             <a href="riwayat_pelanggaran.php?action=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                                         </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

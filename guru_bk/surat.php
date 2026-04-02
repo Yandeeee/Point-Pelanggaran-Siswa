@@ -204,7 +204,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <h2>Cetak Surat</h2>
             </div>
             <div class="user-info">
-                <span>Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru5' ? 'Dedi Pratama' : $_SESSION['username']); ?></span>
+                <span>Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
             </div>
         </div>
 

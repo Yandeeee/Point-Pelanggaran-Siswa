@@ -55,8 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kode_guru = isset($_POST['kode_guru']) ? mysqli_real_escape_string($conn, $_POST['kode_guru']) : '';
         $jenis_kelamin = isset($_POST['jenis_kelamin']) ? mysqli_real_escape_string($conn, $_POST['jenis_kelamin']) : '';
 
+        $password_update = "";
+        if (!empty($_POST['password'])) {
+            $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $password_update = ", password='$hashed_password'";
+        }
+
         $update = mysqli_query($conn, "
-            UPDATE users SET nama='$nama', kode_guru='$kode_guru', jenis_kelamin='$jenis_kelamin', email='$email', role='$role', updated_at=NOW()
+            UPDATE users SET nama='$nama', kode_guru='$kode_guru', jenis_kelamin='$jenis_kelamin', email='$email', role='$role' $password_update, updated_at=NOW()
             WHERE id=$id
         ");
 
@@ -131,7 +137,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <div class="header">
                 <h1>Manajemen User</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru1' ? 'Drs. I Gusti Made Murjana,M.Pd' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
                 </div>
             </div>
 
@@ -176,18 +182,20 @@ if ($action == 'delete' && isset($_GET['id'])) {
                             <input type="email" name="email" value="<?php echo $edit_data && isset($edit_data['email']) ? htmlspecialchars($edit_data['email']) : ''; ?>">
                         </div>
 
-                        <?php if ($action == 'add'): ?>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" required>
+                        <div class="form-group">
+                            <label>Password <?php echo $action == 'edit' ? '<small style="color: #888;">(Kosongkan jika tidak ingin mengubah)</small>' : ''; ?></label>
+                            <div style="position: relative; width: 100%; box-sizing: border-box;">
+                                <input type="password" id="password" name="password" <?php echo $action == 'add' ? 'required' : ''; ?> style="box-sizing: border-box; width: 100%; padding-right: 40px;">
+                                <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; font-size: 16px;"></i>
                             </div>
-                        <?php endif; ?>
+                        </div>
 
                         <div class="form-group">
                             <label>Role</label>
                             <select name="role" required>
                                 <option value="admin" <?php echo $edit_data && $edit_data['role'] == 'admin' ? 'selected' : ''; ?>>Admin</option>
                                 <option value="kepala_sekolah" <?php echo $edit_data && $edit_data['role'] == 'kepala_sekolah' ? 'selected' : ''; ?>>Kepala Sekolah</option>
+                                <option value="waka_kesiswaan" <?php echo $edit_data && $edit_data['role'] == 'waka_kesiswaan' ? 'selected' : ''; ?>>Waka Kesiswaan</option>
                                 <option value="guru" <?php echo $edit_data && $edit_data['role'] == 'guru' ? 'selected' : ''; ?>>Guru Mapel</option>
                                 <option value="guru_bk" <?php echo $edit_data && $edit_data['role'] == 'guru_bk' ? 'selected' : ''; ?>>Guru BK</option>
                                 <option value="siswa" <?php echo $edit_data && $edit_data['role'] == 'siswa' ? 'selected' : ''; ?>>Siswa</option>
@@ -256,5 +264,22 @@ if ($action == 'delete' && isset($_GET['id'])) {
             </div>
         </div>
     </div>
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

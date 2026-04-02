@@ -179,7 +179,7 @@ if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') 
             <div class="header">
                 <h1>Riwayat Pelanggaran</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, Drs. I Gusti Made Murjana,M.Pd</span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
                 </div>
             </div>
 

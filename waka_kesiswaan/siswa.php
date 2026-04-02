@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'waka_kesiswaan'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -42,7 +42,7 @@ if ($query) {
 }
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['role'] === 'admin') {
     if ($action == 'add') {
         $nis = mysqli_real_escape_string($conn, $_POST['nis']);
         $nama_siswa = mysqli_real_escape_string($conn, $_POST['nama_siswa']);
@@ -104,7 +104,7 @@ if ($action == 'edit' && isset($_GET['id'])) {
 }
 
 // Handle delete
-if ($action == 'delete' && isset($_GET['id'])) {
+if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') {
     $id = intval($_GET['id']);
     $delete = mysqli_query($conn, "DELETE FROM siswa WHERE id=$id");
     if ($delete) {
@@ -154,7 +154,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             </div>
 
             <div class="content">
-                <?php if ($action == 'add' || $action == 'edit'): ?>
+                <?php if (($action == 'add' || $action == 'edit') && $_SESSION['role'] === 'admin'): ?>
                     <!-- Form Tambah/Edit -->
                     <h2><?php echo $action == 'add' ? 'Tambah Siswa Baru' : 'Edit Data Siswa'; ?></h2>
                     
@@ -233,9 +233,11 @@ if ($action == 'delete' && isset($_GET['id'])) {
                         <div class="alert alert-success"><?php echo $message; ?></div>
                     <?php endif; ?>
 
+                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="siswa.php?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Siswa</a>
                     </div>
+                    <?php endif; ?>
 
                     <?php if (count($data) > 0): ?>
                         <table>
@@ -249,7 +251,9 @@ if ($action == 'delete' && isset($_GET['id'])) {
 
                                     <th>Email</th>
                                     <th>No. Telepon</th>
+                                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                     <th>Aksi</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -265,10 +269,12 @@ if ($action == 'delete' && isset($_GET['id'])) {
                                         <td><?php echo htmlspecialchars($row['jurusan'] ?? '-'); ?></td>
                                         <td><?php echo htmlspecialchars($row['email'] ?? '-'); ?></td>
                                         <td><?php echo htmlspecialchars($row['no_telepon'] ?? '-'); ?></td>
+                                        <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                         <td>
                                             <a href="siswa.php?action=edit&id=<?php echo $row['id']; ?>" class="btn btn-warning btn-small">Edit</a>
                                             <a href="siswa.php?action=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
                                         </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'kepala_sekolah'])) {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'waka_kesiswaan'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -211,7 +211,7 @@ if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') 
                         <div class="alert alert-danger"><?php echo $error; ?></div>
                     <?php endif; ?>
 
-                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                     <div style="margin-bottom: 20px;">
                         <a href="users.php?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah User</a>
                     </div>
@@ -227,7 +227,7 @@ if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') 
                                     <th>L/P</th>
                                     <th>Role</th>
                                     <th>Dibuat</th>
-                                    <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                                    <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                     <th>Aksi</th>
                                     <?php endif; ?>
                                 </tr>
@@ -244,7 +244,7 @@ if ($action == 'delete' && isset($_GET['id']) && $_SESSION['role'] === 'admin') 
                                         <td><?php echo isset($row['jenis_kelamin']) && $row['jenis_kelamin'] == 'Laki-laki' ? 'L' : (isset($row['jenis_kelamin']) && $row['jenis_kelamin'] == 'Perempuan' ? 'P' : '-'); ?></td>
                                         <td><span class="badge badge-info"><?php echo ucfirst(str_replace('_', ' ', $row['role'])); ?></span></td>
                                         <td><?php echo date('d-m-Y H:i', strtotime($row['created_at'])); ?></td>
-                                        <?php if ($_SESSION['role'] !== 'kepala_sekolah'): ?>
+                                        <?php if ($_SESSION['role'] !== 'waka_kesiswaan'): ?>
                                         <td>
                                             <a href="users.php?action=edit&id=<?php echo $row['id']; ?>" class="btn btn-warning btn-small">Edit</a>
                                             <a href="users.php?action=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger btn-small" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>

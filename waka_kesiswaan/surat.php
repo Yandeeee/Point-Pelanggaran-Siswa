@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['login']) || !in_array($_SESSION['role'], ['admin', 'waka_kesiswaan'])) {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -206,7 +206,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <h2>Cetak Surat</h2>
             </div>
             <div class="user-info">
-                <span>Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
+                <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
             </div>
         </div>
 
@@ -290,7 +290,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                         <input type="text" id="tanggal_pelanggaran_teguran" class="form-control input-sync" placeholder="Contoh: Senin, 05 Januari 2026">
                     </div>
                     <div class="form-group">
-                        <label for="nama_kepsek_teguran">Nama Kepala Sekolah</label>
+                        <label for="nama_kepsek_teguran">Nama Waka Kesiswaan</label>
                         <input type="text" id="nama_kepsek_teguran" class="form-control input-sync" value="Drs. I Gusti Made Murjana,M.Pd">
                     </div>
                 </div>
@@ -306,7 +306,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                         <input type="text" id="alasan_pindah" class="form-control input-sync" placeholder="Contoh: Mengikuti orang tua pindah tugas">
                     </div>
                     <div class="form-group">
-                        <label for="nama_kepsek_pindah">Nama Kepala Sekolah</label>
+                        <label for="nama_kepsek_pindah">Nama Waka Kesiswaan</label>
                         <input type="text" id="nama_kepsek_pindah" class="form-control input-sync" value="Drs. I Gusti Made Murjana,M.Pd">
                     </div>
                 </div>
@@ -460,7 +460,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <td></td>
                 <td>
                   <span class="sync-tanggal_ttd"></span><br />
-                  Kepala Sekolah
+                  Waka Kesiswaan
                   <div class="spasi-ttd"></div>
                   <b id="print_nama_kepsek_teguran"></b>
                 </td>
@@ -481,7 +481,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
             <h3 style="text-align: center; text-decoration: underline; margin-bottom: 5px;">SURAT KETERANGAN PINDAH SEKOLAH</h3>
             <p style="text-align: center; margin-bottom: 30px;">Nomor: <span class="sync-nomor_surat"></span></p>
 
-            <p class="pembuka">Yang bertanda tangan di bawah ini, Kepala Sekolah menerangkan bahwa:</p>
+            <p class="pembuka">Yang bertanda tangan di bawah ini, Waka Kesiswaan menerangkan bahwa:</p>
             
             <table class="detail" style="margin-left: 0; margin-top:20px; margin-bottom: 20px; width: 100%;">
               <tr>
@@ -518,7 +518,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <td></td>
                 <td>
                   <span class="sync-tanggal_ttd"></span><br />
-                  Kepala Sekolah
+                  Waka Kesiswaan
                   <div class="spasi-ttd"></div>
                   <b id="print_nama_kepsek_pindah"></b>
                 </td>

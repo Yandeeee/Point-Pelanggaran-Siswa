@@ -127,7 +127,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <div class="header">
                 <h1>Data Pelanggaran</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru5' ? 'Dedi Pratama' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
                 </div>
             </div>
 

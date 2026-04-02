@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'guru') {
+if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'waka_kesiswaan') {
     header("Location: ../login_app/index.php");
     exit;
 }
@@ -43,15 +43,18 @@ if ($query_recent) {
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
-                <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Guru Panel</h2>
-                <div style="color: #a0aec0; font-size: 14px; margin-top: 5px; font-weight: 500;">Sistem Poin Pelanggaran</div>
+            <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(238, 216, 216, 0.1); margin-bottom: 20px;">
+                <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 60px; height: 60px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Panel Kepala<br>Sekolah</h2>
+                <div style="color: #c4c8ceff; font-size: 14px; margin-top: 10px; font-weight: 500;">Sistem Poin Pelanggaran</div>
             </div>
             <ul>
                 <li><a href="dashboard.php" class="active">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
-
+                <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
+                <li><a href="guru.php">Data Guru</a></li>
+                <li><a href="siswa.php">Data Siswa</a></li>
+                <li><a href="surat.php">Cetak Laporan</a></li>
                 <li style="margin-top: auto;"><a href="../login_app/logout.php" style="color: #fff;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
@@ -59,7 +62,7 @@ if ($query_recent) {
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1>Dashboard Admin</h1>
+                <h1>Dashboard Waka Kesiswaan</h1>
                 <div class="header-actions">
                     <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
                 </div>
@@ -89,9 +92,6 @@ if ($query_recent) {
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <a href="riwayat_pelanggaran.php?action=add" class="btn btn-primary"><i class="fas fa-plus"></i> Catat Pelanggaran</a>
-                </div>
 
                 <!-- Riwayat Terbaru -->
                 <h2>Riwayat Pelanggaran Terbaru</h2>

@@ -63,7 +63,7 @@ if ($query_recent) {
             <div class="header">
                 <h1>Dashboard Guru Bk</h1>
                 <div class="header-actions">
-                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['username'] == 'guru5' ? 'Dedi Pratama' : $_SESSION['username']); ?></span>
+                    <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
                 </div>
             </div>
             <div style="background: white; padding: 15px 20px; margin-bottom: 20px; border-radius: 8px; border-left: 4px solid #2c3e50;">

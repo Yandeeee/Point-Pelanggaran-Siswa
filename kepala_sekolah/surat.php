@@ -206,7 +206,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
                 <h2>Cetak Surat</h2>
             </div>
             <div class="user-info">
-                <span style="color: #666; font-size: 14px;">Selamat datang, Drs. I Gusti Made Murjana,M.Pd</span>
+                <span style="color: #666; font-size: 14px;">Selamat datang, <?php echo htmlspecialchars($_SESSION['nama']); ?></span>
             </div>
         </div>
 
