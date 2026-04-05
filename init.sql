@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Feb 2026 pada 03.56
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Apr 05, 2026 at 08:46 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `guru`
+-- Table structure for table `guru`
 --
 
 CREATE TABLE `guru` (
@@ -42,7 +42,7 @@ CREATE TABLE `guru` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `guru`
+-- Dumping data for table `guru`
 --
 
 INSERT INTO `guru` (`id`, `username`, `password`, `nama`, `kode_guru`, `jenis_kelamin`, `email`, `role`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `guru` (`id`, `username`, `password`, `nama`, `kode_guru`, `jenis_ke
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_pelanggaran`
+-- Table structure for table `jenis_pelanggaran`
 --
 
 CREATE TABLE `jenis_pelanggaran` (
@@ -70,7 +70,7 @@ CREATE TABLE `jenis_pelanggaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `jenis_pelanggaran`
+-- Dumping data for table `jenis_pelanggaran`
 --
 
 INSERT INTO `jenis_pelanggaran` (`id`, `kode_pelanggaran`, `nama_pelanggaran`, `sanksi_poin`, `deskripsi_sanksi`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -83,7 +83,7 @@ INSERT INTO `jenis_pelanggaran` (`id`, `kode_pelanggaran`, `nama_pelanggaran`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurusan`
+-- Table structure for table `jurusan`
 --
 
 CREATE TABLE `jurusan` (
@@ -92,7 +92,7 @@ CREATE TABLE `jurusan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `jurusan`
+-- Dumping data for table `jurusan`
 --
 
 INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `laporan`
+-- Table structure for table `laporan`
 --
 
 CREATE TABLE `laporan` (
@@ -120,7 +120,7 @@ CREATE TABLE `laporan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `laporan`
+-- Dumping data for table `laporan`
 --
 
 INSERT INTO `laporan` (`id`, `jenis_laporan`, `id_surat`, `keterangan`, `created_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -133,7 +133,7 @@ INSERT INTO `laporan` (`id`, `jenis_laporan`, `id_surat`, `keterangan`, `created
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login_logs`
+-- Table structure for table `login_logs`
 --
 
 CREATE TABLE `login_logs` (
@@ -146,7 +146,7 @@ CREATE TABLE `login_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `login_logs`
+-- Dumping data for table `login_logs`
 --
 
 INSERT INTO `login_logs` (`id`, `username`, `role`, `ip_address`, `user_agent`, `logged_at`) VALUES
@@ -170,12 +170,33 @@ INSERT INTO `login_logs` (`id`, `username`, `role`, `ip_address`, `user_agent`, 
 (18, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-25 08:04:00'),
 (19, 'guru1', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-25 08:05:25'),
 (20, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 00:47:26'),
-(21, 'guru1', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 01:18:58');
+(21, 'guru1', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 01:18:58'),
+(22, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 11:43:06'),
+(23, 'guru1', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 12:53:33'),
+(24, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 12:59:48'),
+(25, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-02-26 23:37:09'),
+(26, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-02 00:41:43'),
+(27, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-02 01:31:13'),
+(28, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-02 02:32:25'),
+(29, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-04 00:50:34'),
+(30, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-04 14:17:39'),
+(31, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-05 00:16:23'),
+(32, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-05 03:45:59'),
+(33, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-05 23:30:07'),
+(34, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-05 23:34:29'),
+(35, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-05 23:54:21'),
+(36, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', '2026-03-12 00:58:53'),
+(37, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-01 08:38:56'),
+(38, 'guru1', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-01 10:05:31'),
+(39, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-01 10:16:07'),
+(40, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-01 10:19:44'),
+(41, 'admin', 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-02 13:09:28'),
+(42, 'admin', 'admin', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36', '2026-04-05 06:03:48');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `orang_tua`
+-- Table structure for table `orang_tua`
 --
 
 CREATE TABLE `orang_tua` (
@@ -190,7 +211,7 @@ CREATE TABLE `orang_tua` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `orang_tua`
+-- Dumping data for table `orang_tua`
 --
 
 INSERT INTO `orang_tua` (`id`, `nama_orangTua`, `telp_orangTua`, `pekerjaan_orangTua`, `alamat`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -203,7 +224,7 @@ INSERT INTO `orang_tua` (`id`, `nama_orangTua`, `telp_orangTua`, `pekerjaan_oran
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggaran`
+-- Table structure for table `pelanggaran`
 --
 
 CREATE TABLE `pelanggaran` (
@@ -218,7 +239,7 @@ CREATE TABLE `pelanggaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pelanggaran`
+-- Dumping data for table `pelanggaran`
 --
 
 INSERT INTO `pelanggaran` (`id`, `kode_pelanggaran`, `nama_pelanggaran`, `sanksi_poin`, `deskripsi_sanksi`, `deleted_at`, `created_at`, `updated_at`) VALUES
@@ -236,7 +257,7 @@ INSERT INTO `pelanggaran` (`id`, `kode_pelanggaran`, `nama_pelanggaran`, `sanksi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `riwayat_pelanggaran`
+-- Table structure for table `riwayat_pelanggaran`
 --
 
 CREATE TABLE `riwayat_pelanggaran` (
@@ -250,19 +271,17 @@ CREATE TABLE `riwayat_pelanggaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `riwayat_pelanggaran`
+-- Dumping data for table `riwayat_pelanggaran`
 --
 
 INSERT INTO `riwayat_pelanggaran` (`id`, `siswa_id`, `pelanggaran_id`, `tanggal_pelanggaran`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 2, 8, '0000-00-00', 'terlambat datang lewat dari 15 menit jam pelajaran', '2026-02-25 01:01:00', '2026-02-25 07:46:33'),
-(2, 2, 2, '0000-00-00', 'terlambat datang lewat dari 15 menit jam pelajaran', '2026-02-25 07:46:33', '2026-02-25 07:46:33'),
-(3, 2, 9, '0000-00-00', 'terlambat datang lewat dari 15 menit jam pelajaran', '2026-02-25 07:46:33', '2026-02-25 07:46:33'),
-(4, 2, 7, '0000-00-00', 'terlambat datang lewat dari 15 menit jam pelajaran', '2026-02-25 07:46:33', '2026-02-25 07:46:33');
+(7, 1, 1, '0000-00-00', '', '2026-03-02 00:45:42', '2026-03-02 00:45:42'),
+(8, 3, 8, '0000-00-00', '', '2026-03-05 02:33:06', '2026-03-05 02:33:06');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `siswa`
+-- Table structure for table `siswa`
 --
 
 CREATE TABLE `siswa` (
@@ -271,6 +290,8 @@ CREATE TABLE `siswa` (
   `nama_siswa` varchar(100) NOT NULL,
   `kelas` varchar(10) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) DEFAULT 'siswa',
   `no_telepon` varchar(15) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -283,20 +304,22 @@ CREATE TABLE `siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `siswa`
+-- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `nis`, `nama_siswa`, `kelas`, `email`, `no_telepon`, `deleted_at`, `created_at`, `updated_at`, `nama_orangtua`, `telp_orangtua`, `pekerjaan_orangtua`, `alamat`, `jurusan`) VALUES
-(1, '001', 'Ahmad Rizki', 'X', 'ahmad@email.com', '08123456789', NULL, '2026-02-23 01:28:32', '2026-02-25 03:25:52', 'Sumardi', '2054478', 'pegawai swasta', 'gatau arah', 'Rekayasa Perangkat Lunak'),
-(2, '002', 'Siti Nurhaliza', 'X-A', 'siti@email.com', '08123456790', NULL, '2026-02-23 01:28:32', '2026-02-23 01:28:32', NULL, NULL, NULL, NULL, NULL),
-(3, '003', 'Budi Santoso', 'X-B', 'budi@email.com', '08123456791', NULL, '2026-02-23 01:28:32', '2026-02-23 01:28:32', NULL, NULL, NULL, NULL, NULL),
-(4, '004', 'Ani Wijaya', 'X-B', 'ani@email.com', '08123456792', NULL, '2026-02-23 01:28:32', '2026-02-23 01:28:32', NULL, NULL, NULL, NULL, NULL),
-(5, '005', 'Rika Septiana', 'X-C', 'rika@email.com', '08123456793', NULL, '2026-02-23 01:28:32', '2026-02-23 01:28:32', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `siswa` (`id`, `nis`, `nama_siswa`, `kelas`, `email`, `password`, `role`, `no_telepon`, `deleted_at`, `created_at`, `updated_at`, `nama_orangtua`, `telp_orangtua`, `pekerjaan_orangtua`, `alamat`, `jurusan`) VALUES
+(1, '001', 'Ahmad Rizki', 'X', 'ahmad@email.com', '001', 'siswa', '08123456789', NULL, '2026-02-23 01:28:32', '2026-04-05 06:45:15', 'Andi Wijaya', '081234567001', 'Wiraswasta', 'Jakarta', 'Rekayasa Perangkat Lunak'),
+(2, '002', 'Siti Nurhaliza', 'X', 'siti@email.com', '002', 'siswa', '08123456790', NULL, '2026-02-23 01:28:32', '2026-04-05 06:45:15', 'Slamet Riyadi', '081234567002', 'Petani', 'Bogor', 'Bisnis Digital'),
+(3, '003', 'Budi Santoso', 'XI', 'budi@email.com', '003', 'siswa', '08123456791', NULL, '2026-02-23 01:28:32', '2026-04-05 06:45:15', 'Rudi Hartono', '081234567003', 'Karyawan Swasta', 'Depok', 'Animasi'),
+(4, '004', 'Ani Wijaya', 'X', 'ani@email.com', '004', 'siswa', '08123456792', NULL, '2026-02-23 01:28:32', '2026-04-05 06:45:15', 'Agus Salim', '081234567004', 'PNS', 'Bekasi', 'Teknik Komputer Jaringan'),
+(5, '005', 'Rika Septiari', 'X', 'rika@email.com', '005', 'siswa', '08123456793', NULL, '2026-02-23 01:28:32', '2026-04-05 06:45:15', 'Joko Susilo', '081234567005', 'Pedagang', 'Tangerang', 'Desain Komunikasi Visual'),
+(6, '006', 'Bagus Renata', 'X', 'Renata@gmail.yahoo', '006', 'siswa', '08123456789', NULL, '2026-02-26 13:01:51', '2026-04-05 06:45:15', 'Darsono', '13214124121', 'pegawai swasta', 'Jl. Pengacara, gg pengangguan banyak acara', 'Desain Komunikasi Visual'),
+(9, '007', 'Aristya', 'XI', 'aristya@gmail.com', '007', 'siswa', '2420690205', NULL, '2026-03-05 23:41:01', '2026-04-05 06:45:15', 'Diah', '2311', 'PNS', 'jalan sampai bensin habis', 'Desain Komunikasi Visual');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `surat`
+-- Table structure for table `surat`
 --
 
 CREATE TABLE `surat` (
@@ -313,7 +336,7 @@ CREATE TABLE `surat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `surat`
+-- Dumping data for table `surat`
 --
 
 INSERT INTO `surat` (`id`, `jenis_surat`, `nomor_surat`, `tanggal_surat`, `id_siswa`, `keterangan`, `created_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -326,7 +349,7 @@ INSERT INTO `surat` (`id`, `jenis_surat`, `nomor_surat`, `tanggal_surat`, `id_si
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -343,62 +366,75 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nama`, `kode_guru`, `jenis_kelamin`, `email`, `role`, `created_at`, `updated_at`) VALUES
 (12, 'admin', '$2y$10$QyYF5k5Cm3RnRBQggSgIwupsLyktC1gbOKCt05uwPBmKrEL/ly3Jm', 'admin', '', '', '', 'admin', '2026-02-23 01:28:32', '2026-02-25 07:21:37'),
-(13, 'guru1', '$2y$10$LsM9rjVg6Tq3MgqUMQiwo.wybW6Z8b.L2bqoYFcstjwp19xQOfQ7i', 'Budi Santoso M.Pd', 'GR001', 'Laki-laki', 'budi@guru.sch.id', 'admin', '2026-02-25 06:32:43', '2026-02-25 07:21:24');
+(13, 'guru1', '$2y$10$LsM9rjVg6Tq3MgqUMQiwo.wybW6Z8b.L2bqoYFcstjwp19xQOfQ7i', 'Drs. I Gusti Made Murjana,M.Pd', 'GR001', 'Laki-laki', 'budi@guru.sch.id', 'admin', '2026-02-25 06:32:43', '2026-02-26 12:54:41'),
+(18, 'guru2', '$2y$10$xnJ4Eh7mwb4Tz/pEjLrMNOjIlGQrQ42LwFNZccrKsMD5ukPnN1nfO', 'Siti Aminah', NULL, NULL, NULL, 'guru', '2026-03-05 02:20:19', '2026-03-05 02:20:19'),
+(19, 'guru5', '$2y$10$WvxXPhlb3vJqKZS2AX3EWu3pHJuTjYZ5qkS2V.YO8w9DywrXzJoFu', 'Dedi Pratama', NULL, NULL, NULL, 'guru_bk', '2026-03-05 02:20:19', '2026-03-05 02:20:19'),
+(20, 'guru3', '$2y$10$yGWZfPLMwz7B6VZF1XYQHekf0RDxeUTi6Bl7sqStWNZhRtdQy6wPu', 'Ahmad Fauzi', NULL, NULL, NULL, 'guru', '2026-03-05 02:35:14', '2026-03-05 02:35:14'),
+(21, 'guru4', '$2y$10$mx4gOGHmL6jctPEYr3IV5uBJnie9pZJzt51VEnlbdn3X269/7AFuO', 'Rina Lestari', NULL, NULL, NULL, 'guru', '2026-03-05 02:35:14', '2026-03-05 02:35:14'),
+(22, '001', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Ahmad Rizki', NULL, NULL, NULL, 'siswa', '2026-03-05 03:34:32', NULL),
+(24, '002', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Siti Nurhaliza', '', 'Perempuan', '', 'admin', '2026-03-05 03:38:22', '2026-03-05 23:41:42'),
+(25, '003', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Budi Santoso', NULL, NULL, NULL, 'siswa', '2026-03-05 03:38:22', NULL),
+(26, '004', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Ani Wijaya', NULL, NULL, NULL, 'siswa', '2026-03-05 03:38:22', NULL),
+(27, '005', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Rika Septiana', NULL, NULL, NULL, 'siswa', '2026-03-05 03:38:22', NULL),
+(28, '006', '$2y$10$833epaLG3OBTrWnzEMd5NuKsttVgeUHE5ETxOEv0HRikc4lTEqoEm', 'Bagus Renata', NULL, NULL, NULL, 'siswa', '2026-03-05 03:38:22', NULL),
+(29, '007', '$2y$10$uW9Tu7moqz794APOQTx3vOPMq2Mp42N3yrrO/K6W3gA5FTRjyVJmi', 'Aristya', '', 'Perempuan', 'aristya@gmail.com', 'siswa', '2026-03-05 23:51:56', '2026-03-05 23:51:56'),
+(30, 'Kepala Sekolah', '$2y$10$i9K1qbWZnOMXUdQD7vYXa.HQwYVRo.kF97J8j6DqwVNH/iKJclJLW', '\'Drs. I Gusti Made Murjana,M.Pd', 'GR001', 'Laki-laki', 'murjana@gmail.com', 'kepala_sekolah', '2026-04-01 10:18:08', '2026-04-01 10:18:08'),
+(31, 'wakasek', '$2y$10$i75acb.aER5b6pK2KGpOZu4BVooHhDeUyMpzUeoEJKf7cQovy2akC', 'Nyoman Sucana', 'GR007', 'Laki-laki', 'sucana@gmail.com', 'waka_kesiswaan', '2026-04-02 13:29:45', '2026-04-02 13:44:51');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `guru`
+-- Indexes for table `guru`
 --
 ALTER TABLE `guru`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `jenis_pelanggaran`
+-- Indexes for table `jenis_pelanggaran`
 --
 ALTER TABLE `jenis_pelanggaran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `jurusan`
+-- Indexes for table `jurusan`
 --
 ALTER TABLE `jurusan`
   ADD PRIMARY KEY (`id_jurusan`);
 
 --
--- Indeks untuk tabel `laporan`
+-- Indexes for table `laporan`
 --
 ALTER TABLE `laporan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `login_logs`
+-- Indexes for table `login_logs`
 --
 ALTER TABLE `login_logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `orang_tua`
+-- Indexes for table `orang_tua`
 --
 ALTER TABLE `orang_tua`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pelanggaran`
+-- Indexes for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kode_pelanggaran` (`kode_pelanggaran`);
 
 --
--- Indeks untuk tabel `riwayat_pelanggaran`
+-- Indexes for table `riwayat_pelanggaran`
 --
 ALTER TABLE `riwayat_pelanggaran`
   ADD PRIMARY KEY (`id`),
@@ -406,101 +442,101 @@ ALTER TABLE `riwayat_pelanggaran`
   ADD KEY `pelanggaran_id` (`pelanggaran_id`);
 
 --
--- Indeks untuk tabel `siswa`
+-- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nis` (`nis`);
 
 --
--- Indeks untuk tabel `surat`
+-- Indexes for table `surat`
 --
 ALTER TABLE `surat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `guru`
+-- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_pelanggaran`
+-- AUTO_INCREMENT for table `jenis_pelanggaran`
 --
 ALTER TABLE `jenis_pelanggaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `jurusan`
+-- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
   MODIFY `id_jurusan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `laporan`
+-- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `login_logs`
+-- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT untuk tabel `orang_tua`
+-- AUTO_INCREMENT for table `orang_tua`
 --
 ALTER TABLE `orang_tua`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggaran`
+-- AUTO_INCREMENT for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `riwayat_pelanggaran`
+-- AUTO_INCREMENT for table `riwayat_pelanggaran`
 --
 ALTER TABLE `riwayat_pelanggaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `siswa`
+-- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `surat`
+-- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `riwayat_pelanggaran`
+-- Constraints for table `riwayat_pelanggaran`
 --
 ALTER TABLE `riwayat_pelanggaran`
   ADD CONSTRAINT `riwayat_pelanggaran_ibfk_1` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id`) ON DELETE CASCADE,

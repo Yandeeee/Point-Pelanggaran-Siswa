@@ -50,14 +50,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $jurusan = mysqli_real_escape_string($conn, $_POST['jurusan'] ?? '');
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $no_telepon = mysqli_real_escape_string($conn, $_POST['no_telepon']);
+       if ($action == 'add') {
+        $nis = mysqli_real_escape_string($conn, $_POST['nis']);
+        $nama_siswa = mysqli_real_escape_string($conn, $_POST['nama_siswa']);
+        $kelas = mysqli_real_escape_string($conn, $_POST['kelas']);
+        $jurusan = mysqli_real_escape_string($conn, $_POST['jurusan'] ?? '');
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $no_telepon = mysqli_real_escape_string($conn, $_POST['no_telepon']);
         $nama_orangtua = mysqli_real_escape_string($conn, $_POST['nama_orangtua'] ?? '');
         $telp_orangtua = mysqli_real_escape_string($conn, $_POST['telp_orangtua'] ?? '');
         $pekerjaan_orangtua = mysqli_real_escape_string($conn, $_POST['pekerjaan_orangtua'] ?? '');
         $alamat = mysqli_real_escape_string($conn, $_POST['alamat'] ?? '');
+       }        
+        // --- PERBAIKAN DI SINI ---
+        // Kita tambahkan kolom 'password' (diambil dari NIS) dan 'role' (diisi 'siswa')
+        $password = $nis; 
+        $role = 'siswa';
 
         $insert = mysqli_query($conn, "
-            INSERT INTO siswa (nis, nama_siswa, kelas, jurusan, email, no_telepon, nama_orangtua, telp_orangtua, pekerjaan_orangtua, alamat, created_at, updated_at)
-            VALUES ('$nis', '$nama_siswa', '$kelas', '$jurusan', '$email', '$no_telepon', '$nama_orangtua', '$telp_orangtua', '$pekerjaan_orangtua', '$alamat', NOW(), NOW())");
+            INSERT INTO siswa (
+                nis, nama_siswa, kelas, jurusan, email, no_telepon, 
+                nama_orangtua, telp_orangtua, pekerjaan_orangtua, alamat, 
+                password, role, created_at, updated_at
+            )
+            VALUES (
+                '$nis', '$nama_siswa', '$kelas', '$jurusan', '$email', '$no_telepon', 
+                '$nama_orangtua', '$telp_orangtua', '$pekerjaan_orangtua', '$alamat', 
+                '$password', '$role', NOW(), NOW()
+            )");
+        // -------------------------
 
         if ($insert) {
             $message = "Data siswa berhasil ditambahkan!";
@@ -65,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         } else {
             $error = "Error: " . mysqli_error($conn);
+
         }
     } elseif ($action == 'edit') {
         $id = intval($_POST['id']);
@@ -135,6 +157,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
+                <li><a href="rekap_pelanggaran.php">Rekap Pelanggaran</a></li>
                 <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
                 <li><a href="guru.php">Data Guru</a></li>
                 <li><a href="siswa.php" class="active">Data Siswa</a></li>

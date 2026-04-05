@@ -115,6 +115,7 @@ if ($action == 'delete' && isset($_GET['id'])) {
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
+                <li><a href="rekap_pelanggaran.php">Rekap Pelanggaran</a></li>
                 <li><a href="pelanggaran.php" class="active">Data Pelanggaran</a></li>
                 <li><a href="guru.php">Data Guru</a></li>
                 <li><a href="siswa.php">Data Siswa</a></li>

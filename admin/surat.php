@@ -191,6 +191,7 @@ $base64_image = isset($matches[1]) ? $matches[1] : '';
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
+                <li><a href="rekap_pelanggaran.php">Rekap Pelanggaran</a></li>
                 <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
                 <li><a href="guru.php">Data Guru</a></li>
                 <li><a href="siswa.php">Data Siswa</a></li>

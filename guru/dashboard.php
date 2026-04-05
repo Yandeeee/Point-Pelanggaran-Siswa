@@ -51,6 +51,7 @@ if ($query_recent) {
             <ul>
                 <li><a href="dashboard.php" class="active">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
+                <li><a href="rekap_pelanggaran.php">Rekap Pelanggaran</a></li>
 
                 <li style="margin-top: auto;"><a href="../login_app/logout.php" style="color: #fff;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>

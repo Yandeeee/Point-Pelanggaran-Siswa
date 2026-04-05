@@ -1,79 +1,73 @@
 <?php
-session_start();
-include "../database.php";
+// Mencegah error session double
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// set timezone for logging
+// Aktifkan laporan error agar tidak blank putih jika ada salah ketik
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include "../database.php"; 
+
 date_default_timezone_set('Asia/Makassar');
 
-$username = mysqli_real_escape_string($conn, $_POST['username']);
-$password = $_POST['password'];
-$role     = $_POST['role'];
+// 1. Ambil Input & Bersihkan
+$username = isset($_POST['username']) ? trim(mysqli_real_escape_string($conn, $_POST['username'])) : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$role     = isset($_POST['role']) ? $_POST['role'] : '';
 
-$query = mysqli_query($conn, "
-    SELECT * FROM users 
-    WHERE username='$username' 
-    AND role='$role'
-");
-
+// 2. Cari di tabel users (Admin/Guru)
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND role='$role'");
 $user = mysqli_fetch_assoc($query);
 
+// 3. Cari di tabel siswa jika di users tidak ada
+if (!$user && $role === 'siswa') {
+    // Cari berdasarkan NIS
+    $query_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE nis='$username'");
+    $user = mysqli_fetch_assoc($query_siswa);
+    
+    if ($user) {
+        $user['role'] = 'siswa';
+        $user['nama'] = $user['nama_siswa'] ?? $user['nama'] ?? 'Siswa';
+    }
+}
+
+// 4. Proses Validasi
 if ($user) {
-    if (password_verify($password, $user['password'])) {
-        $_SESSION['login'] = true;
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['nama'] = isset($user['nama']) && $user['nama'] !== '' ? $user['nama'] : $user['username'];
+    $is_valid_password = false;
+    
+    // Paksa string & trim agar 003 identik
+    $input_pass = trim((string)$password);
+    $db_pass    = trim((string)$user['password']);
 
-        // only log admin logins; guru logins won't be recorded
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            // ensure login_logs table exists
-            $createTable = "CREATE TABLE IF NOT EXISTS login_logs (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100),
-                role VARCHAR(50),
-                ip_address VARCHAR(45),
-                user_agent TEXT,
-                logged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )";
-            mysqli_query($conn, $createTable);
-
-            // insert a log record for admin only
-            $ip = $_SERVER['REMOTE_ADDR'] ?? '';
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? mysqli_real_escape_string($conn, $_SERVER['HTTP_USER_AGENT']) : '';
-            $usernameEsc = mysqli_real_escape_string($conn, $user['username']);
-            $roleEsc = mysqli_real_escape_string($conn, $user['role']);
-            $insertLog = "INSERT INTO login_logs (username, role, ip_address, user_agent) VALUES ('{$usernameEsc}', '{$roleEsc}', '" . mysqli_real_escape_string($conn, $ip) . "', '{$ua}')";
-            mysqli_query($conn, $insertLog);
-        }
-
-        // redirect user based on role
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            header("Location: ../../admin/dashboard.php");
-            exit;
-        } elseif (isset($user['role']) && $user['role'] === 'kepala_sekolah') {
-            header("Location: ../../kepala_sekolah/dashboard.php");
-            exit;
-        } elseif (isset($user['role']) && $user['role'] === 'waka_kesiswaan') {
-            header("Location: ../../waka_kesiswaan/dashboard.php");
-            exit;
-        } elseif (isset($user['role']) && $user['role'] === 'guru') {
-            // relative path from login_app/verifikasi to /guru/dashboard.php
-            header("Location: ../../guru/dashboard.php");
-            exit;
-        } elseif (isset($user['role']) && $user['role'] === 'guru_bk') {
-            header("Location: ../../guru_bk/dashboard.php");
-            exit;
-        } elseif (isset($user['role']) && $user['role'] === 'siswa') {
-            header("Location: ../../siswa/dashboard.php");
-            exit;
-        } else {
-            header("Location: ../../admin/dashboard.php");
-            exit;
+    if ($user['role'] === 'siswa') {
+        // Cek teks langsung (003 == 003) ATAU cek hash
+        if ($input_pass == $db_pass || password_verify($input_pass, $db_pass)) {
+            $is_valid_password = true;
         }
     } else {
-        echo "<script>alert('Password salah');history.back();</script>";
+        // Admin & Guru pakai hash
+        if (password_verify($input_pass, $user['password'])) {
+            $is_valid_password = true;
+        }
+    }
+
+    if ($is_valid_password) {
+        $_SESSION['login']    = true;
+        $_SESSION['username'] = $username;
+        $_SESSION['role']     = $user['role'];
+        $_SESSION['nama']     = ($user['nama'] != '') ? $user['nama'] : $username;
+
+        // Redirect otomatis (Pastikan folder siswa/admin sudah ada)
+        header("Location: ../../" . $user['role'] . "/dashboard.php");
+        exit;
+    } else {
+        echo "<script>alert('Password salah!');history.back();</script>";
     }
 } else {
-    echo "<script>alert('User tidak ditemukan');history.back();</script>";
+    // Hapus tanda // di bawah ini untuk melihat apa yang dibaca PHP
+    die("DEBUG -> Input: [" . $input_pass . "] | DB: [" . $db_pass . "] | Panjang Input: " . strlen($input_pass) . " | Panjang DB: " . strlen($db_pass));
+    echo "<script>alert('User tidak ditemukan! Cek kembali NIS dan pilihan Role Anda.');history.back();</script>";
 }
 ?>

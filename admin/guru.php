@@ -119,13 +119,14 @@ if ($action === 'edit' && isset($_GET['id'])) {
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header" style="text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
-                <img src="../login_app/asset/gambar/images.png" alt="Logo" style="width: 60px; height: 60px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                <!-- <img rc="../login_app/asset/gambar/images.png" alt="Logo" style="wsidth: 60px; height: 60px; object-fit: contain; background: white; border-radius: 50%; padding: 5px; margin-bottom: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"> -->
                 <h2 style="font-size: 20px; color: #fff; margin: 0; padding: 0;">Admin Panel</h2>
                 <div style="color: #c4c8ceff; font-size: 14px; margin-top: 10px; font-weight: 500;">Sistem Poin Pelanggaran</div>
             </div>
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
                 <li><a href="riwayat_pelanggaran.php">Riwayat Pelanggaran</a></li>
+                <li><a href="rekap_pelanggaran.php">Rekap Pelanggaran</a></li>
                 <li><a href="pelanggaran.php">Data Pelanggaran</a></li>
                 <li><a href="guru.php" class="active">Data Guru</a></li>
                 <li><a href="siswa.php">Data Siswa</a></li>
